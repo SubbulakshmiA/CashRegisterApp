@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <TextView
+        android:id="@+id/lv_product_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:hint="Product type"
+        android:textSize="20sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/lv_qnty_tv"
+
+        />
+
+    <TextView
+        android:id="@+id/lv_qnty_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/lv_product_type"
+        app:layout_constraintStart_toStartOf="parent"
+        android:hint="qunty "
+        android:textSize="16sp"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintEnd_toStartOf="@id/lv_price_tv"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        />
+    <TextView
+        android:id="@+id/lv_price_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/lv_product_type"
+        android:hint="price "
+        android:gravity="center"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
