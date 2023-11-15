@@ -25,9 +25,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     TextView prodType,total,qnty;
     Items it ;
     String currentText;
-    int rowSelected = 0;
-    int qntyOrdered = 0;
-    double totalAmt = 0.0;
+    int rowSelected  ;//= 0;
+    String selectedProdType;
+    int qntyOrdered;// = 0;
+    double totalAmt;// = 0.0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,10 +63,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         qnty = findViewById(R.id.qnty_tv);
         total = findViewById(R.id.total);
 
-        list = ((MyApp)getApplication()).list;
-        list.add(((MyApp)getApplication()).it1);
-        list.add(((MyApp)getApplication()).it2);
-        list.add(((MyApp)getApplication()).it3);
+        list = ((MyApp)getApplication()).getList();
+        rowSelected = ((MyApp)getApplication()).rowSelected;
+        qntyOrdered = ((MyApp)getApplication()).qntyOrdered;
+        totalAmt = ((MyApp)getApplication()).totalAmt;
+//        list.add(((MyApp)getApplication()).it1);
+//        list.add(((MyApp)getApplication()).it2);
+//        list.add(((MyApp)getApplication()).it3);
 
         purchaseList = ((MyApp)getApplication()).purchaseList;
 
@@ -82,16 +86,30 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         listView.setAdapter(lvAdapter);
         listView.setOnItemClickListener(this);
+        if(rowSelected >=0){
+            selectedProdType = ((MyApp)getApplication()).getList().get(rowSelected).proType;
+            prodType.setText(selectedProdType);
+            qnty.setText(String.valueOf(qntyOrdered));
+            total.setText(String.valueOf(totalAmt));
 
-
+        }
     }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Log.d("adapter", "clicked ittem at "+i );
         lvAdapter.onItemClick(i,view);
-        prodType.setText(list.get(i).proType);
+        selectedProdType = ((MyApp)getApplication()).getList().get(i).proType;
+        prodType.setText(selectedProdType);
+        ((MyApp)getApplication()).rowSelected = i;
         rowSelected = i;
+        if( !qnty.getText().toString().isEmpty()){
+            ((MyApp) getApplication()).qntyOrdered = qntyOrdered;
+            totalAmt = qntyOrdered * list.get(rowSelected).price;
+            total.setText((String.valueOf(totalAmt)));
+            ((MyApp) getApplication()).totalAmt = totalAmt;
+
+        }
     }
 
     @Override
@@ -102,21 +120,24 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             currentText = qnty.getText().toString();
             String updatedText = currentText +btnString;
             qntyOrdered = Integer.parseInt(updatedText);
-            if(qntyOrdered <= list.get(rowSelected).qnty && !prodType.getText().toString().isEmpty()){
-                qnty.setText(updatedText);
+            qnty.setText(String.valueOf(qntyOrdered));
+            if( rowSelected>=0){
+                ((MyApp) getApplication()).qntyOrdered = qntyOrdered;
                 totalAmt = qntyOrdered * list.get(rowSelected).price;
                 total.setText((String.valueOf(totalAmt)));
-            }else{
-                currentText = "";
-                qnty.setText(currentText);
-                Toast.makeText(this,"Please select an item and available quantity ",Toast.LENGTH_LONG).show();
+                ((MyApp) getApplication()).totalAmt = totalAmt;
+
             }
+
 
         }else if (btn == btnC){
             currentText = "";
             qnty.setText(currentText);
+            total.setText(currentText);
         } else {
-            if(!prodType.getText().toString().isEmpty() && !qnty.getText().toString().isEmpty()){
+
+            if( validateQnty() && !prodType.getText().toString().isEmpty() && !qnty.getText().toString().isEmpty() &&
+                    !qnty.getText().toString().equals("0")){
                 list.get(rowSelected).qnty =list.get(rowSelected).qnty - qntyOrdered;
                 lvAdapter.notifyDataSetChanged();
                 PurchasedItems purchasedItemList = new PurchasedItems(list.get(rowSelected).proType,list.get(rowSelected).qnty,
@@ -137,6 +158,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 qnty.setText(currentText);
                 prodType.setText(currentText);
                 total.setText(currentText);
+                ((MyApp)getApplication()).totalAmt = 0.0;
+                ((MyApp)getApplication()).qntyOrdered = 0;
+                ((MyApp)getApplication()).rowSelected = -1;
             }else {
                 Toast.makeText(this,"Please select an item and quantity ",Toast.LENGTH_LONG).show();
             }
@@ -144,5 +168,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 System.out.println("i in purchaseList "+i.total);
             }
         }
+    }
+    boolean validateQnty(){
+        if (qntyOrdered <= list.get(rowSelected).qnty && !prodType.getText().toString().isEmpty()) {
+            return  true;
+        } else {
+            currentText = "";
+            qnty.setText(currentText);
+            Toast.makeText(this, "Please select an item and available quantity ", Toast.LENGTH_LONG).show();
+            return  false;
+        }
+
     }
 }
