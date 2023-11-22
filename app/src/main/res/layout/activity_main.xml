@@ -18,15 +18,28 @@
         app:titleTextColor="@color/black" />-->
 
     <TextView
-        android:id="@+id/productType"
-        android:layout_width="match_parent"
+        android:id="@+id/product_type"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
 
         android:gravity="center"
         android:hint="Product Type"
         android:textSize="26sp"
         app:layout_constraintBottom_toTopOf="@id/total"
+        app:layout_constraintEnd_toStartOf="@id/manager_btn"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></TextView>
+    <Button
+        android:id="@+id/manager_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Manager"
+        android:textSize="14sp"
+        android:background="@drawable/rectangle"
+        app:layout_constraintStart_toEndOf="@id/product_type"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/total"></Button>
     <TextView
         android:id="@+id/qnty_tv"
         android:layout_width="wrap_content"
@@ -37,7 +50,7 @@
         android:textSize="26sp"
         android:layout_marginLeft="10dp"
         app:layout_constraintBottom_toTopOf="@id/guideline1"
-        app:layout_constraintTop_toBottomOf="@id/productType"
+        app:layout_constraintTop_toBottomOf="@id/product_type"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/total"
         ></TextView>
@@ -53,7 +66,7 @@
         app:layout_constraintBottom_toTopOf="@id/guideline1"
         app:layout_constraintStart_toEndOf="@id/qnty_tv"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/productType"></TextView>
+        app:layout_constraintTop_toBottomOf="@id/product_type"></TextView>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline1"
@@ -191,7 +204,7 @@
         android:background="@drawable/rectangle"
         android:text="BUY"
         android:textColor="@color/black"
-        app:backgroundTint="@color/Turquoise"
+
         app:layout_constraintTop_toTopOf="@id/tableLayout"
         app:layout_constraintBottom_toBottomOf="@id/tableLayout"
         app:layout_constraintStart_toEndOf="@id/tableLayout"

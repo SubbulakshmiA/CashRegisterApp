@@ -2,16 +2,11 @@ package com.example.cashregisterapp;
 
 public class PurchasedItems extends Items{
     double total;
-    PurchasedItems(String proType, int qnty, Double price,Double total) {
+    String purchaseDate;
+    PurchasedItems(String proType, int qnty, Double price,Double total,String purchaseDate) {
         super(proType, qnty, price);
         this.total = total;
+        this.purchaseDate = purchaseDate;
     }
 
-    public double getTotal() {
-        return total;
-    }
-
-    public void setTotal(double total) {
-        this.total = total;
-    }
 }
