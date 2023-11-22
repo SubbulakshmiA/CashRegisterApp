@@ -146,14 +146,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
                    timeNow = LocalDateTime.now();
                     purchaseDate = dtf.format(timeNow);
+                    PurchasedItems purchasedItemList =  new PurchasedItems(list.get(rowSelected).proType,qntyOrdered,
+                            list.get(rowSelected).price,totalAmt,purchaseDate);
+                    purchaseList.add(purchasedItemList);
                 }
                 System.out.println("time of purchase "+purchaseDate);
-                PurchasedItems purchasedItemList = null;
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                    purchasedItemList = new PurchasedItems(list.get(rowSelected).proType,qntyOrdered,
-                            list.get(rowSelected).price,totalAmt,purchaseDate);
-                }
-                purchaseList.add(purchasedItemList);
+        // AlertDialog
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Thank you for your purchase");
                 builder.setMessage("Your purchase is "+qntyOrdered+" " +list.get(rowSelected).proType+" for "+totalAmt);
