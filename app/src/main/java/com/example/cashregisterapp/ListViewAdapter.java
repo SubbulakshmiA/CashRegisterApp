@@ -31,7 +31,8 @@ public class ListViewAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
-        return list.get(i);
+
+      return list.get(i);
     }
 
     @Override
@@ -57,10 +58,5 @@ public class ListViewAdapter extends BaseAdapter {
         return view;
     }
 
-    void onItemClick(int i, View view){
-        Log.d("adapter","item clicked "+i);
-    TextView qntyTv = view.findViewById(R.id.lv_qnty_tv);
-    qntyTv.setText(String.valueOf(list.get(i).qnty));
-    }
 
 }
