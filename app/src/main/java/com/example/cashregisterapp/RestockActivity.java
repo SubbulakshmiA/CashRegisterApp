@@ -45,9 +45,9 @@ public class RestockActivity extends AppCompatActivity {
 //              view.setBackgroundColor(getResources().getColor(R.color.Pink));
                 rowSelected = position;
                 if(row >= 0){
-                    parent.getChildAt(row).setBackgroundColor(getResources().getColor(R.color.white));
+                    parent.getChildAt(row).setBackgroundColor(getColor(R.color.white));
                  }
-                parent.getChildAt(position).setBackgroundColor(getResources().getColor(R.color.Pink));
+                parent.getChildAt(position).setBackgroundColor(getColor(R.color.Pink));
                 row = position;
 
             }
