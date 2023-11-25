@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             rowSelected = savedInstanceState.getInt("rowSelected");
             qntyOrdered = savedInstanceState.getInt("qntyOrdered");
             totalAmt = savedInstanceState.getDouble("totalAmt");
-//            currentText = savedInstanceState.getString("currentText");
+
         }
         btn0 = findViewById(R.id.btn_0);
         btn0.setOnClickListener(this);

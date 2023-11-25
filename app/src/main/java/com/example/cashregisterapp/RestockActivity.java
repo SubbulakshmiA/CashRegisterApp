@@ -57,7 +57,7 @@ public class RestockActivity extends AppCompatActivity {
         okbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(rowSelected >=0) {
+                if(rowSelected >=0 && !restockEidtText.getText().toString().isEmpty()) {
                     newQunty = Integer.parseInt(restockEidtText.getText().toString());
                     list.get(rowSelected).qnty = newQunty;
                     lvAdapter.notifyDataSetChanged();

@@ -14,11 +14,6 @@ public class ListViewAdapter extends BaseAdapter {
     ArrayList<Items> list;
     Context activityContext;
 
-//    DonationsBaseAdapter(ArrayList<Donation> list, Context context){
-//        this.donationArrayList = list;
-//        activityContext = context;
-//    }
-//
   ListViewAdapter(  ArrayList<Items> list, Context context){
     this.list = list;
     activityContext = context;
